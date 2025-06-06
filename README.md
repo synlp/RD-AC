@@ -6,7 +6,7 @@ This is the code for our paper titled "Representation Decomposition for Learning
 
 ### Get the low-rank matrix
 
-See the commands in `command.sh` for examples to run on HMC data.
+See the commands in `command.sh` for examples to run on MABSA data.
 
 ### Train the model
 
@@ -15,10 +15,10 @@ Run the following command to train a model
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 torchrun --nnodes 1 --nproc_per_node 8 --master-port 21443 train.py \
     --model_name_or_path /path/to/Qwen2-VL-2B-Instruct \
-    --training_data_path /path/to/processed_data/hmc/all_data.json \
-    --training_image_dir /path/to/data/hmc \
-    --training_lmr_dir path/to/processed_data/hmc \
-    --data_name hmc \
+    --training_data_path /path/to/processed_data/twitter2015/all_data.json \
+    --training_image_dir /path/to/data/IJCAI2019_data/twitter2015_images \
+    --training_lmr_dir path/to/processed_data/twitter2015/train_emb \
+    --data_name twitter \
     --output_dir /path/to/output_model \
     --save_total_limit 1 \
     --report_to none \
@@ -42,11 +42,11 @@ Run the following command to test a model
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python test.py \
-    --image_dir /path/to/data/hmc \
-    --lmr_dir /path/to/processed_data/hmc \
+    --image_dir /path/to/data/IJCAI2019_data/twitter2015_images \
+    --lmr_dir /path/to/processed_data/twitter2015/test_emb \
     --model_path /path/to/output_model \
-    --input_json /path/to/processed_data/hmc/all_data.json \
-    --data_name hmc \
-    --output_file hmc-base.json
+    --input_json /path/to/processed_data/twitter2015/all_data.json \
+    --data_name twitter \
+    --output_file output.json
 ```
 
